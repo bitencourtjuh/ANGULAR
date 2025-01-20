@@ -1,0 +1,72 @@
+<mat-tab-group color="accent" *ngIf="todosList().length > 0; else withoutTodos">
+  <mat-tab label="Em andamento">
+    <div *ngFor="let todo of todosList()">
+      <mat-card class="todo_card" *ngIf="todo?.done === false">
+        <mat-card-header>
+          <mat-card-title class="todo_card_title">
+            {{ todo?.title }}
+          </mat-card-title>
+          <mat-card-subtitle class="todo_card_subtitle">
+            {{ todo?.description }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button
+            class="header_btn check-btn"
+            mat-icon-button
+            aria-label="Concluir Tarefa"
+            (click)="handleDoneTodo(todo.id)"
+          >
+            <mat-icon>done_all</mat-icon>
+          </button>
+          <button
+            class="header_btn check-btn todo_form_delete_btn"
+            mat-icon-button
+            aria-label="Deletar Tarefa"
+            (click)="handleDeleteTodo(todo)"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Concluídas">
+    <div *ngFor="let todo of todosList()">
+      <mat-card class="todo_card" *ngIf="todo?.done === true">
+        <mat-card-header>
+          <mat-card-title class="todo_card_title">
+            {{ todo?.title }}
+          </mat-card-title>
+          <mat-card-subtitle class="todo_card_subtitle">
+            {{ todo?.description }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-actions align="end">
+          <button
+            class="header_btn check_btn"
+            mat-icon-button
+            aria-label="Concluir Tarefa"
+            (click)="handleDoneTodo(todo.id)"
+          >
+            <mat-icon>done_all</mat-icon>
+          </button>
+          <button
+            class="header_btn check_btn todo_form_delete_btn"
+            mat-icon-button
+            aria-label="Deletar Tarefa"
+            (click)="handleDeleteTodo(todo)"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<ng-template #withoutTodos>
+  <h3 class="warn_message">Não há tarefas a serem exibidas!</h3>
+</ng-template>
